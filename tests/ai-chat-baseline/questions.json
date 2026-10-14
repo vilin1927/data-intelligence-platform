@@ -1,0 +1,120 @@
+{
+  "_meta": {
+    "description": "Regression set for the AI assistant. Each question lists the tools the agent is expected to call, phrases the answer must contain, and a minimum answer length. Run against a live instance with scripts/ai-chat-smoke.sh.",
+    "baseline_date": "2026-04-29"
+  },
+  "questions": [
+    {
+      "id": "A1",
+      "question": "Give me an executive summary of the business for the latest closed month \u2014 total revenue, MAT, MMT, top wines, alerts.",
+      "expected_tools_any_of": [
+        "get_overview_kpis",
+        "get_sales_summary",
+        "run_sql_query"
+      ],
+      "must_have_any_of": [
+        "MAT",
+        "revenue",
+        "Latest Month"
+      ],
+      "min_response_chars": 1000
+    },
+    {
+      "id": "A3",
+      "question": "Sales by territory for the last quarter. Show top 10 with YoY change.",
+      "expected_tools_any_of": [
+        "get_sales_by_territory",
+        "run_sql_query"
+      ],
+      "must_have_any_of": [
+        "Territory",
+        "territory",
+        "Revenue"
+      ],
+      "min_response_chars": 800
+    },
+    {
+      "id": "A7",
+      "question": "Show me MQT (Moving Quarterly Total) broken down by territory and channel.",
+      "expected_tools_any_of": [
+        "run_sql_query",
+        "get_sales_by_territory",
+        "get_channel_comparison"
+      ],
+      "must_have_any_of": [
+        "MQT",
+        "Quarter",
+        "channel"
+      ],
+      "min_response_chars": 500
+    },
+    {
+      "id": "A8",
+      "question": "Margin by SKU \u2014 top 20 by GP% with revenue, COGS, and units sold.",
+      "expected_tools_any_of": [
+        "get_margin_ranking",
+        "run_sql_query"
+      ],
+      "must_have_any_of": [
+        "GP%",
+        "Margin",
+        "COGS"
+      ],
+      "min_response_chars": 800
+    },
+    {
+      "id": "A10",
+      "question": "Inventory cover \u2014 show me wines with stock on hand and months of cover based on velocity.",
+      "expected_tools_any_of": [
+        "get_inventory_status",
+        "run_sql_query"
+      ],
+      "must_have_any_of": [
+        "cover",
+        "Stock",
+        "stock",
+        "velocity"
+      ],
+      "min_response_chars": 800
+    },
+    {
+      "id": "B4",
+      "question": "What was the GP% for Lock Key Shiraz 2016 last year?",
+      "expected_tools_any_of": [
+        "get_wine_profile",
+        "run_sql_query"
+      ],
+      "must_have_any_of": [
+        "Lock",
+        "Shiraz",
+        "GP%"
+      ],
+      "min_response_chars": 500
+    },
+    {
+      "id": "C",
+      "question": "Top 20 customers by revenue with channel, territory, cases sold, revenue, and YoY change.",
+      "expected_tools_any_of": [
+        "get_sales_by_customer",
+        "run_sql_query"
+      ],
+      "must_have_any_of": [
+        "Customer",
+        "customer",
+        "YoY",
+        "Revenue"
+      ],
+      "min_response_chars": 800
+    }
+  ],
+  "forbidden_error_patterns": [
+    "password authentication failed",
+    "FATAL:  password",
+    "column .* does not exist",
+    "relation .* does not exist",
+    "syntax error at or near",
+    "must appear in the GROUP BY",
+    "ANTHROPIC_API_KEY not set",
+    "AI service not configured"
+  ]
+}

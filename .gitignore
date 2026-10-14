@@ -1,0 +1,23 @@
+# Dependencies and build output
+node_modules/
+.next/
+out/
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.tsbuildinfo
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+xero_tokens.json
+config/service_account.json
+credentials*
+
+# Logs and OS files
+*.log
+*.sql.gz
+.DS_Store
